@@ -1,47 +1,50 @@
 # Super Mario – COM4008 CW1 Project
 
-A Java (Greenfoot) implementation of a Super Mario–style platformer, built for the COM4008 Programming Concepts CW1 assignment.
+A Java (Greenfoot) implementation of a Super Mario-style platformer, built for the COM4008 Programming Concepts CW1 assignment.
 
 ## Module Info
 
-- **Module:** COM4008 Programming Concepts
-- **Assignment:** CW1 Project
-- **Codebase:** Super Mario (Java / Greenfoot)
-- **Student:** *(your name / student ID)*
+* **Module:** COM4008 Programming Concepts
+* **Assignment:** CW1 Project
+* **Codebase:** Super Mario (Java / Greenfoot)
+* **Student ID:** 22423822
+* **Submission Date:** 23/08/2026
 
-## Requirements Being Implemented
+## Requirements Implemented
 
-This project works towards the following requirement(s) from the assignment brief:
+This project fulfills all core requirements and distinction features as a solo implementation:
 
 | # | Requirement | Status |
-|---|---|---|
-| 1 | Tilemap loading as an array of objects, with camera scrolling as Mario moves left/right | ⬜ Not started |
-| 2 | Mario movement (left, right, jump physics) and collision detection with tiles/blocks/powerups | ⬜ Not started |
-| 3 | Final boss (e.g. Bowser) with movement patterns, fireballs, animation and sound | ⬜ Not started |
+| :--- | :--- | :--- |
+| **1** | Tilemap loading as an array of objects, with camera scrolling as Mario moves left/right | 🟩 **Completed** |
+| **2** | Mario movement (left, right, jump physics) and collision detection with tiles/blocks/powerups | 🟩 **Completed** |
+| **3** | Final boss (e.g. Bowser) with movement patterns, fireballs, animation and sound | 🟩 **Completed** |
 
-*(Update the table above as you go — this doubles as quick evidence of progress for markers.)*
+---
 
-## Project Structure
+## Project Structure & Architecture
 
-```
-.
-├── src/mario/        # Java source files (Greenfoot classes)
-├── images/           # Sprite / tile images
-├── sounds/            # Sound effects and music
-├── wiki/              # Local copies of wiki pages (also published to GitHub Wiki)
-└── .github/           # Issue templates
-```
+* **`MarioWorld.java`:** Manages the game loop, 2D array tile parsing (`LEVEL_MAP`), HUD overlays (Score, Coins, Lives, Bowser HP), and viewport camera translations.
+* **`ScrollActor.java`:** Abstract base class managing Cartesian world coordinates (`worldX`, `worldY`) and dynamic screen rendering.
+* **`Tile.java`:** Concrete tile implementations (`GroundTile`, `BlockTile`, `QuestionBlock`, `Coin`).
+* **`Mario.java`:** Player actor driven by semi-implicit Euler integration, jump kinetics, and dual-pass AABB collision resolution.
+* **`Bowser.java`:** Boss entity utilising a timer-driven finite state machine for jumping patrols, multi-frame animations, and attack routines.
+* **`Fireball.java`:** Projectile entity featuring independent linear trajectories and screen-boundary culling.
 
-## How to Run
+---
 
-1. Install [Greenfoot](https://www.greenfoot.org/download) (or open as a plain Java project — see notes below).
-2. Open this folder as a Greenfoot project (`project.greenfoot` file, or File → Open).
-3. Click **Compile**, then right-click the World class and select **new MarioWorld()**, then **Run**.
+## Controls
 
-## Development Log & Documentation
+* **Left / Right (or A / D):** Move horizontally
+* **Space / Up (or W):** Jump
+* **Objective:** Traverse the stage, hit `?` question blocks from below to collect coins, and defeat Bowser by stomping his head while dodging fireballs.
 
-Progress, testing notes, and design decisions are documented in the [GitHub Wiki](../../wiki) for this repository, and tracked via [Issues](../../issues).
+---
 
-## Academic Integrity Note
+## Documentation & Evidence
 
-This repository documents original coursework for COM4008. Any use of AI assistance in development is acknowledged in line with BNU's Artificial Intelligence Guidance for Students.
+Detailed documentation for assessment criteria is available in the repository Wiki:
+
+* [Concepts Explained](https://github.com/LemonTurbine87/COM4008-Super-Mario-Game/wiki/Concepts-Explained) – Architectural overview, requirement mappings, non-trivial bug diagnosis, and oral demo script outline.
+* [Development Log](https://github.com/LemonTurbine87/COM4008-Super-Mario-Game/wiki/Development-Log) – Dated sprint logs and problem-solving records (10/08/2026 – 23/08/2026).
+* [Testing Matrix](https://github.com/LemonTurbine87/COM4008-Super-Mario-Game/wiki/Testing) – Full verification table covering manual test cases across Requirements 1, 2, and 3.

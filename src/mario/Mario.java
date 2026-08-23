@@ -7,7 +7,7 @@ public class Mario extends Actor {
     private final double JUMP_STRENGTH = -14.5;
     private final double MOVE_SPEED = 4.5;
     private boolean onGround = false;
-    private int facing = 1; // 1 = right, -1 = left
+    private int facing = 1;
     private int animTick = 0;
 
     public Mario() {
@@ -39,12 +39,13 @@ public class Mario extends Actor {
         if ((Greenfoot.isKeyDown("space") || Greenfoot.isKeyDown("up") || Greenfoot.isKeyDown("w")) && onGround) {
             vY = JUMP_STRENGTH;
             onGround = false;
+            try { Greenfoot.playSound("jump.wav"); } catch (Exception e) {}
         }
     }
 
     private void applyGravity() {
         vY += GRAVITY;
-        if (vY > 13.0) vY = 13.0; // Terminal velocity
+        if (vY > 13.0) vY = 13.0;
     }
 
     private void moveHorizontally() {
@@ -63,11 +64,11 @@ public class Mario extends Actor {
         setLocation(getX(), getY() + (int) vY);
         Tile block = (Tile) getOneIntersectingObject(Tile.class);
         if (block != null) {
-            if (vY > 0) { // Landing on top
+            if (vY > 0) {
                 setLocation(getX(), block.getY() - (getImage().getHeight() / 2) - (block.getImage().getHeight() / 2));
                 vY = 0;
                 onGround = true;
-            } else if (vY < 0) { // Hitting from underneath
+            } else if (vY < 0) {
                 setLocation(getX(), block.getY() + (getImage().getHeight() / 2) + (block.getImage().getHeight() / 2));
                 vY = 0;
                 if (block instanceof QuestionBlock) {
@@ -83,11 +84,11 @@ public class Mario extends Actor {
         Fireball fb = (Fireball) getOneIntersectingObject(Fireball.class);
         Bowser bowser = (Bowser) getOneIntersectingObject(Bowser.class);
 
-        // Jump on Bowser to damage him
         if (bowser != null) {
             if (vY > 1.0 && getY() < bowser.getY() - 15) {
                 bowser.takeDamage();
-                vY = -10.0; // Bounce Mario up
+                vY = -10.0;
+                try { Greenfoot.playSound("jump.wav"); } catch (Exception e) {}
                 return;
             } else {
                 takeDamageAndRespawn();
@@ -118,22 +119,17 @@ public class Mario extends Actor {
 
     private void renderVisual() {
         GreenfootImage img = new GreenfootImage(30, 42);
-        // Cap & Shirt (Red)
         img.setColor(new Color(220, 20, 20));
-        img.fillOval(5, 2, 20, 14); // Cap
-        img.fillRect(6, 16, 18, 14); // Torso
-        // Face & Skin
+        img.fillOval(5, 2, 20, 14);
+        img.fillRect(6, 16, 18, 14);
         img.setColor(new Color(255, 205, 150));
         img.fillOval(facing == 1 ? 12 : 4, 6, 12, 10);
-        // Overalls (Blue)
         img.setColor(new Color(30, 80, 200));
         img.fillRect(7, 26, 16, 10);
-        // Running animation offset
         int legOffset = (onGround && vX != 0) ? (int) (Math.sin(animTick * 0.4) * 4) : 0;
-        img.setColor(new Color(110, 50, 20)); // Shoes
+        img.setColor(new Color(110, 50, 20));
         img.fillRect(5, 36 + legOffset, 8, 6);
         img.fillRect(17, 36 - legOffset, 8, 6);
-
         setImage(img);
     }
 }

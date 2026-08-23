@@ -17,16 +17,14 @@ public class Bowser extends ScrollActor {
     public void act() {
         timer++;
         animFrame++;
-        
-        // AI State Pattern: Jump and Patrol
+
         if (timer % 50 == 0) {
             direction = (worldX > startX) ? -1 : 1;
         }
         if (timer % 80 == 0) {
-            vY = -7.0; // Hop
+            vY = -7.0;
         }
-        
-        // Gravity for Boss
+
         vY += 0.5;
         if (vY > 8.0) vY = 8.0;
         worldY += (int) vY;
@@ -37,7 +35,6 @@ public class Bowser extends ScrollActor {
 
         worldX += direction * 2;
 
-        // Attack cycle: Shoot Fireballs
         if (timer % 110 == 0) {
             shootFireball();
         }
@@ -52,6 +49,7 @@ public class Bowser extends ScrollActor {
         if (getWorld() != null) {
             Fireball fb = new Fireball(worldX - 35, worldY - 10, -6);
             getWorld().addObject(fb, getX() - 35, getY() - 10);
+            try { Greenfoot.playSound("fireball.wav"); } catch (Exception e) {}
         }
     }
 
@@ -69,26 +67,21 @@ public class Bowser extends ScrollActor {
 
     private void renderVisual() {
         GreenfootImage img = new GreenfootImage(70, 70);
-        // Body
         img.setColor(new Color(34, 139, 34));
         img.fillOval(10, 15, 45, 45);
-        // Shell & Spikes
         img.setColor(new Color(139, 69, 19));
         img.fillOval(25, 10, 35, 40);
         img.setColor(Color.WHITE);
         img.fillOval(45, 15, 8, 8);
         img.fillOval(48, 30, 8, 8);
-        // Head / Snout
         img.setColor(new Color(40, 160, 40));
         img.fillOval(2, 20, 25, 25);
         img.setColor(Color.RED);
-        img.fillOval(8, 22, 6, 6); // Eye
-        // Breath animation
+        img.fillOval(8, 22, 6, 6);
         if (timer % 110 > 85) {
             img.setColor(Color.ORANGE);
             img.fillOval(0, 30, 12, 10);
         }
-        // Health Bar UI
         img.setColor(Color.BLACK);
         img.fillRect(10, 2, 50, 6);
         img.setColor(Color.RED);

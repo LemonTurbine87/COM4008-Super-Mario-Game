@@ -8,7 +8,7 @@ A Java (Greenfoot) implementation of a Super Mario-style platformer, built for t
 * **Assignment:** CW1 Project
 * **Codebase:** Super Mario (Java / Greenfoot)
 * **Student ID:** 22423822
-* **Submission Date:** 23/08/2026
+* **Submission Date:** 25/08/2026
 
 ## Requirements Implemented
 
@@ -46,5 +46,5 @@ This project fulfills all core requirements and distinction features as a solo i
 Detailed documentation for assessment criteria is available in the repository Wiki:
 
 * [Concepts Explained](https://github.com/LemonTurbine87/COM4008-Super-Mario-Game/wiki/Concepts-Explained) – Architectural overview, requirement mappings, non-trivial bug diagnosis, and oral demo script outline.
-* [Development Log](https://github.com/LemonTurbine87/COM4008-Super-Mario-Game/wiki/Development-Log) – Dated sprint logs and problem-solving records (10/08/2026 – 23/08/2026).
+* [Development Log](https://github.com/LemonTurbine87/COM4008-Super-Mario-Game/wiki/Development-Log) – Dated sprint logs and problem-solving records (25/08/2026 – 25/08/2026).
 * [Testing Matrix](https://github.com/LemonTurbine87/COM4008-Super-Mario-Game/wiki/Testing) – Full verification table covering manual test cases across Requirements 1, 2, and 3.

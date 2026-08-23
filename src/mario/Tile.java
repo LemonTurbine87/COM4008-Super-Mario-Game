@@ -10,9 +10,9 @@ class GroundTile extends Tile {
     public GroundTile(int wx, int wy) {
         super(wx, wy);
         GreenfootImage img = new GreenfootImage(32, 32);
-        img.setColor(new Color(90, 160, 40)); // Grass top
+        img.setColor(new Color(90, 160, 40));
         img.fillRect(0, 0, 32, 6);
-        img.setColor(new Color(130, 75, 30)); // Dirt body
+        img.setColor(new Color(130, 75, 30));
         img.fillRect(0, 6, 32, 26);
         img.setColor(new Color(80, 40, 15));
         img.drawRect(0, 0, 31, 31);
@@ -28,7 +28,6 @@ class BlockTile extends Tile {
         img.fill();
         img.setColor(new Color(60, 20, 0));
         img.drawRect(0, 0, 31, 31);
-        // Brick lines
         img.drawLine(0, 15, 31, 15);
         img.drawLine(15, 0, 15, 15);
         img.drawLine(7, 16, 7, 31);
@@ -71,6 +70,7 @@ class QuestionBlock extends Tile {
                 MarioWorld mw = (MarioWorld) getWorld();
                 mw.addScore(100);
                 mw.addCoin();
+                try { Greenfoot.playSound("coin.wav"); } catch (Exception e) {}
                 mw.addObject(new Coin(worldX, worldY - 32), getX(), getY() - 32);
             }
         }
